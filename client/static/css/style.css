@@ -1,3 +1,4 @@
-h1 {
-    color: red;
+.campaign__form {
+    display: flex;
+    flex-direction: column;
 }

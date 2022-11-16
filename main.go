@@ -52,6 +52,7 @@ func init() {
 	*/
 
 	server.Static("/css", "./client/static/css") // display css
+	server.Static("/js", "./client/js")
 	server.LoadHTMLGlob("client/static/*.html") // load all the html files
 
 	/*
@@ -63,8 +64,13 @@ func init() {
 			"title": "Main website",
 		})
 	})
-	server.GET("/form", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "form.html", gin.H{
+	server.GET("/new", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "newCampaign.html", gin.H{
+			"title": "Main website",
+		})
+	})
+	server.GET("/one/:name", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "oneCampaign.html", gin.H{
 			"title": "Main website",
 		})
 	})
