@@ -14,6 +14,7 @@ type CampaignServiceImpl struct {
 	ctx context.Context
 }
 
+//initialisation
 func NewCampaignService(campaignCollection *mongo.Collection, ctx context.Context) CampaignService {
 	return &CampaignServiceImpl {
 		campaignCollection: campaignCollection,
@@ -65,8 +66,8 @@ func (c *CampaignServiceImpl) GetByName(name *string) (*models.Campaign, error) 
 }
 
 // Update a Campaign
-func (c *CampaignServiceImpl) UpdateCampaign(campaign *models.Campaign) error {
-	filter := bson.D{bson.E{Key: "campaign_name", Value: campaign.Name}}
+func (c *CampaignServiceImpl) UpdateCampaign(campaignName string, campaign *models.Campaign) error {
+	filter := bson.D{bson.E{Key: "campaign_name", Value: campaignName}}
 	update := bson.D{bson.E{Key: "$set", Value: bson.D{bson.E{Key: "campaign_name", Value: campaign.Name}, bson.E{Key: "campaign_start", Value: campaign.StartDate}, bson.E{Key: "campaign_end", Value: campaign.EndDate}, bson.E{Key: "campaign_price", Value: campaign.Price}, bson.E{Key: "campaign_objective", Value: campaign.Objective}, bson.E{Key: "campaign_pricePerDisplay", Value: campaign.PricePerDisplay}}}}
 	result, _ := c.campaignCollection.UpdateOne(c.ctx, filter, update)
 	if result.MatchedCount != 1 {

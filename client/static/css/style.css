@@ -1,0 +1,23 @@
+.campaign__form {
+    display: flex;
+    flex-direction: column;
+}
+
+#campaign__all {
+    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.campaign__card {
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+.campaign__buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
