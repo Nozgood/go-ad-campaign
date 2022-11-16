@@ -15,7 +15,9 @@ const newCampaign = () => {
     const endValue = campaignEnd.value;
     const priceValue = parseInt(campaignPrice.value);
     const objectiveValue = parseInt(campaignObjective.value);
-    const pricePerDisplay = parseInt(priceValue/objectiveValue);
+    const pricePerDisplay = priceValue / objectiveValue;
+
+    console.log(pricePerDisplay);
 
     const formSubmit = {
         "name": nameValue,
@@ -40,14 +42,6 @@ const newCampaign = () => {
         console.log(data);
     })
 }
-
-
-// display the pricePerDisplay
-campaignObjective.addEventListener("change", () => {
-    if ((campaignPrice.value && campaignObjective.value) !== undefined) {
-        campaignPricePerDisplay.value = parseInt(campaignPrice.value) / parseInt(campaignObjective.value);
-    }
-})
 
 // event when submit 
 submit.addEventListener("click", (event) => {

@@ -61,7 +61,7 @@ func init() {
 
 	server.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "prout",
+			"title": "okok",
 		})
 	})
 	server.GET("/new", func(c *gin.Context) {

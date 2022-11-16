@@ -12,5 +12,5 @@ type Campaign struct {
 	EndDate         string	`json:"endDate" bson:"campaign_end"`
 	Price           int		`json:"price" bson:"campaign_price"`
 	Objective       int		`json:"objective" bson:"campaign_objective"`
-	PricePerDisplay int		`json:"pricePerDisplay" bson:"campaign_pricePerDisplay"`
+	PricePerDisplay float64	`json:"pricePerDisplay" bson:"campaign_pricePerDisplay"`
 }

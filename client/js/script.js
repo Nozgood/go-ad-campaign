@@ -6,7 +6,6 @@ fetch("http://localhost:8080/api/campaign/getAll")
             return res.json()
         })
         .then((data) => {
-            console.log(data[0].name);
             allCampaigns = data;
             for (let i=0; i < allCampaigns.length; i++) {
                 let campaignDiv = document.createElement("div");
@@ -26,9 +25,7 @@ fetch("http://localhost:8080/api/campaign/getAll")
 
                 let campaignModify = document.createElement("a");
                 campaignModify.setAttribute("href", `http://localhost:8080/${allCampaigns[i].name}`)
-                campaignModify.innerHTML = "Modifier";
-                let campaignDelete = document.createElement("button");
-                campaignDelete.innerHTML = "Supprimer";
+                campaignModify.innerHTML = "Afficher";
 
                 campaignDiv.appendChild(campaignName);
                 campaignDiv.appendChild(campaignStart);
@@ -40,3 +37,4 @@ fetch("http://localhost:8080/api/campaign/getAll")
                 campaignCard.appendChild(campaignDiv);
             }
         })
+

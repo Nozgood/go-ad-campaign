@@ -10,13 +10,12 @@ const campaignPrice = document.getElementById("campaignPrice");
 const campaignObjective = document.getElementById("campaignObjective");
 const campaignPricePerDisplay = document.getElementById("campaignPricePerDisplay");
 const submit = document.getElementById("submit");
+const deleteButton = document.getElementById("deleteButton");
 
-let oldNameValue;
 
 fetch("http://localhost:8080/api/campaign/getByName/" + campaignUrlName)
     .then((res) => {return res.json()})
     .then((data) => {
-        oldNameValue = data.name;
         campaignName.setAttribute("value", data.name);
         campaignStart.setAttribute("value", data.startDate);
         campaignEnd.setAttribute("value", data.endDate);
@@ -31,8 +30,7 @@ campaignObjective.addEventListener("change", () => {
     }
 });
 
-
-// function to request 
+// function to request to update
 const updateCampaign = () => {
     const nameValue = campaignName.value;
     const startValue = campaignStart.value;
@@ -65,8 +63,25 @@ const updateCampaign = () => {
         });
 }
 
-// request when click on submit button
+// update request send when click on submit button
 submit.addEventListener("click", (event) => {
     event.preventDefault();
     updateCampaign();
 })
+
+// function to delete the campaign 
+const deleteCampaign = () => {
+    fetch("http://localhost:8080/api/campaign/delete/" + campaignUrlName, {
+        method: "DELETE"
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+}
+
+deleteButton.addEventListener("click" , () => {
+    deleteCampaign();
+});

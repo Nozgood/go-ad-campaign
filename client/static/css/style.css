@@ -14,3 +14,10 @@
     border: 1px solid black;
     border-radius: 8px;
 }
+.campaign__buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

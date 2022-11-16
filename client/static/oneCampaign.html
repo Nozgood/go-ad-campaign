@@ -22,9 +22,12 @@
         <input type="number" name="campaignObjective" id="campaignObjective">
         <label for="campaignPricePerDisplay">Prix par affichage</label>
         <input type="number" name="campaignPricePerDisplay" id="campaignPricePerDisplay" disabled>
-        <input type="submit" value="Créer" id="submit">
+        <input type="submit" value="Modifier" id="submit">
     </form>
-    <a href="http://localhost:8080" class="new__cancel">Annuler</a>
+    <div class="campaign__buttons">
+        <button class="campaign__button" id="deleteButton">Supprimer</button>
+        <a href="http://localhost:8080" class="new__cancel">Annuler</a>
+    </div>
     <script src="../js/oneCampaign.js"></script>
 </body>
 </html>
