@@ -6,6 +6,7 @@ fetch("http://localhost:8080/api/campaign/getAll")
             return res.json()
         })
         .then((data) => {
+            console.log(data[0].name);
             allCampaigns = data;
             for (let i=0; i < allCampaigns.length; i++) {
                 let campaignDiv = document.createElement("div");
@@ -24,9 +25,8 @@ fetch("http://localhost:8080/api/campaign/getAll")
                 campaignPricePerDisplay.innerHTML = "Prix par affichage : " + allCampaigns[i].pricePerDisplay;
 
                 let campaignModify = document.createElement("a");
-                campaignModify.setAttribute("href", `http://localhost:8080/one/${allCampaigns[i].name}`)
+                campaignModify.setAttribute("href", `http://localhost:8080/${allCampaigns[i].name}`)
                 campaignModify.innerHTML = "Modifier";
-        
                 let campaignDelete = document.createElement("button");
                 campaignDelete.innerHTML = "Supprimer";
 

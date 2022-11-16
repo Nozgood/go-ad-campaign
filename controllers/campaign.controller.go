@@ -58,12 +58,13 @@ func (cc *CampaignController) GetByName(ctx *gin.Context)  {
 
 // Update a Campaign
 func (cc *CampaignController) UpdateCampaign(ctx *gin.Context) {
+	campaignName := ctx.Param("name")
 	var campaign models.Campaign
 	if err := ctx.ShouldBindJSON(&campaign); err != nil { // error handling during create campaign variable
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return 
 	}
-	err := cc.CampaignService.UpdateCampaign(&campaign)
+	err := cc.CampaignService.UpdateCampaign(campaignName, &campaign)
 	if err != nil { // error handling during interaction with MongoDB
 		ctx.JSON(http.StatusBadGateway, gin.H{"message": err.Error()})
 		return 
@@ -91,6 +92,6 @@ func (cc *CampaignController) RegisterCampaignRoutes(rg *gin.RouterGroup) {
 	campaignRoute.POST("/create", cc.CreateCampaign) // final route is http://localhost:PORT/campaign/create for example
 	campaignRoute.GET("/getAll", cc.GetAll)
 	campaignRoute.GET("/getByName/:name", cc.GetByName)
-	campaignRoute.PATCH("/update", cc.UpdateCampaign)
+	campaignRoute.PATCH("/update/:name", cc.UpdateCampaign)
 	campaignRoute.DELETE("/delete/:name", cc.DeleteCampaign)
 }

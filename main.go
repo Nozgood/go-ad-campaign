@@ -61,18 +61,14 @@ func init() {
 
 	server.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Main website",
+			"title": "prout",
 		})
 	})
 	server.GET("/new", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "newCampaign.html", gin.H{
-			"title": "Main website",
-		})
+		c.HTML(http.StatusOK, "newCampaign.html", nil)
 	})
 	server.GET("/:name", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "oneCampaign.html", gin.H{
-			"title": "Main website",
-		})
+		c.HTML(http.StatusOK, "oneCampaign.html", nil)
 	})
 }
 

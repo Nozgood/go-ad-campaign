@@ -1,28 +1,72 @@
-let url = new URL(window.location.href);
-let campaignName = url.href.split(':8080/')[1];
+const url = new URL(window.location.href);
+const campaignUrlName = url.href.split(':8080/')[1];
 
-let campaignDiv = document.getElementById("oneCampaign");
+// getting the inputs 
+const form = document.getElementsByClassName("campaign__form");
+const campaignName = document.getElementById("campaignName");
+const campaignStart = document.getElementById("campaignStart");
+const campaignEnd = document.getElementById("campaignEnd");
+const campaignPrice = document.getElementById("campaignPrice");
+const campaignObjective = document.getElementById("campaignObjective");
+const campaignPricePerDisplay = document.getElementById("campaignPricePerDisplay");
+const submit = document.getElementById("submit");
 
-fetch("http://localhost:8080/api/campaign/getByName/" + campaignName)
+let oldNameValue;
+
+fetch("http://localhost:8080/api/campaign/getByName/" + campaignUrlName)
     .then((res) => {return res.json()})
     .then((data) => {
-        let campaignName = document.createElement("h3");
-        campaignName.innerHTML = "Nom : " + data.name;
-        let campaignStart = document.createElement("p");
-        campaignStart.innerHTML = "Date de début : " + data.startDate;
-        let campaignEnd = document.createElement("p");
-        campaignEnd.innerHTML = "Date de fin : " + data.endDate;
-        let campaignPrice = document.createElement("p");
-        campaignPrice.innerHTML = "Prix : " +  data.price;
-        let campaignObjective = document.createElement("p");
-        campaignObjective.innerHTML = "Objectif d'affichage : " + data.objective;
-        let campaignPricePerDisplay = document.createElement("p");
-        campaignPricePerDisplay.innerHTML = "Prix par affichage : " + data.pricePerDisplay;
-        
-        campaignDiv.appendChild(campaignName);
-        campaignDiv.appendChild(campaignStart);
-        campaignDiv.appendChild(campaignEnd);
-        campaignDiv.appendChild(campaignPrice);
-        campaignDiv.appendChild(campaignObjective);
-        campaignDiv.appendChild(campaignPricePerDisplay);
+        oldNameValue = data.name;
+        campaignName.setAttribute("value", data.name);
+        campaignStart.setAttribute("value", data.startDate);
+        campaignEnd.setAttribute("value", data.endDate);
+        campaignPrice.setAttribute("value", data.price);
+        campaignObjective.setAttribute("value", data.objective);
+        campaignPricePerDisplay.setAttribute("value", data.pricePerDisplay);
     });
+
+campaignObjective.addEventListener("change", () => {
+    if ((campaignPrice.value && campaignObjective.value) !== undefined) {
+        campaignPricePerDisplay.value = parseInt(campaignPrice.value) / parseInt(campaignObjective.value);
+    }
+});
+
+
+// function to request 
+const updateCampaign = () => {
+    const nameValue = campaignName.value;
+    const startValue = campaignStart.value;
+    const endValue = campaignEnd.value;
+    const priceValue = parseInt(campaignPrice.value);
+    const objectiveValue = parseInt(campaignObjective.value);
+    const pricePerDisplay = parseInt(campaignPricePerDisplay.value);
+
+    const updatedInfos = {
+        "name": nameValue,
+        "startDate": startValue,
+        "endDate": endValue,
+        "price": priceValue,
+        "objective": objectiveValue,
+        "pricePerDisplay": pricePerDisplay
+    }
+
+    fetch("http://localhost:8080/api/campaign/update/" + campaignUrlName, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedInfos)
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            console.log(data);
+        });
+}
+
+// request when click on submit button
+submit.addEventListener("click", (event) => {
+    event.preventDefault();
+    updateCampaign();
+})
