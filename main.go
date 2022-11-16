@@ -79,7 +79,7 @@ func init() {
 func main() {
 	defer mongoClient.Disconnect(ctx)
 
-	basepath := server.Group("/v1")
+	basepath := server.Group("/api")
 	CampaignController.RegisterCampaignRoutes(basepath)
 
 	log.Print(server.Run(":8080"))

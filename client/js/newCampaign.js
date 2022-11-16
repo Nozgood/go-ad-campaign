@@ -26,7 +26,7 @@ const newCampaign = () => {
         "pricePerDisplay": pricePerDisplay
     }
 
-    fetch("http://localhost:8080/v1/campaign/create", {
+    fetch("http://localhost:8080/api/campaign/create", {
         method: "POST",
         headers: {
             "Content-Type": 'application/json',
