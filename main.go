@@ -69,7 +69,7 @@ func init() {
 			"title": "Main website",
 		})
 	})
-	server.GET("/one/:name", func(c *gin.Context) {
+	server.GET("/:name", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "oneCampaign.html", gin.H{
 			"title": "Main website",
 		})

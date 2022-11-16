@@ -23,12 +23,20 @@ fetch("http://localhost:8080/api/campaign/getAll")
                 let campaignPricePerDisplay = document.createElement("p");
                 campaignPricePerDisplay.innerHTML = "Prix par affichage : " + allCampaigns[i].pricePerDisplay;
 
+                let campaignModify = document.createElement("a");
+                campaignModify.setAttribute("href", `http://localhost:8080/one/${allCampaigns[i].name}`)
+                campaignModify.innerHTML = "Modifier";
+        
+                let campaignDelete = document.createElement("button");
+                campaignDelete.innerHTML = "Supprimer";
+
                 campaignDiv.appendChild(campaignName);
                 campaignDiv.appendChild(campaignStart);
                 campaignDiv.appendChild(campaignEnd);
                 campaignDiv.appendChild(campaignPrice);
                 campaignDiv.appendChild(campaignObjective);
                 campaignDiv.appendChild(campaignPricePerDisplay);
+                campaignDiv.appendChild(campaignModify);
                 campaignCard.appendChild(campaignDiv);
             }
         })
