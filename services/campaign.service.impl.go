@@ -84,3 +84,5 @@ func (c *CampaignServiceImpl) DeleteCampaign(name *string) error {
 	}
 	return nil
 } 
+
+// Display index.html

@@ -6,6 +6,7 @@ import (
 	"go-ad-campaign/controllers"
 	"go-ad-campaign/services"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -25,6 +26,10 @@ var (
 
 func init() {
 	ctx = context.TODO()
+	/*
+	Connection to MONGODB
+	Error management
+	*/
 	mongoConn := options.Client().ApplyURI("mongodb+srv://noz:okgoogle@projet7.tkmrk.mongodb.net/?retryWrites=true&w=majority")
 	mongoClient, err := mongo.Connect(ctx, mongoConn)
 	if err != nil {
@@ -41,6 +46,28 @@ func init() {
 	campaignService = services.NewCampaignService(campaignCollection, ctx)
 	CampaignController = controllers.New(campaignService)
 	server = gin.Default()
+
+			/*
+	Display the static files
+	*/
+
+	server.Static("/css", "./client/static/css") // display css
+	server.LoadHTMLGlob("client/static/*.html") // load all the html files
+
+	/*
+	display in function of the route
+	*/
+
+	server.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"title": "Main website",
+		})
+	})
+	server.GET("/form", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "form.html", gin.H{
+			"title": "Main website",
+		})
+	})
 }
 
 func main() {
@@ -49,5 +76,5 @@ func main() {
 	basepath := server.Group("/v1")
 	CampaignController.RegisterCampaignRoutes(basepath)
 
-	log.Fatal(server.Run(":8080"))
+	log.Print(server.Run(":8080"))
 }
