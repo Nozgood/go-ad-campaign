@@ -11,22 +11,40 @@ const submit = document.getElementById("submit");
 // fetch to post the new campaign
 const newCampaign = () => {
     const nameValue = campaignName.value;
-    const startValue = campaignStart.value;
-    const endValue = campaignEnd.value;
+    const startDate = new Date(campaignStart.value);
+    const endDate = new Date(campaignEnd.value);
     const priceValue = parseInt(campaignPrice.value);
     const objectiveValue = parseInt(campaignObjective.value);
     const pricePerDisplay = priceValue / objectiveValue;
 
-    console.log(pricePerDisplay);
+    console.log(startDate, endDate);
+
+    const startDay = startDate.getDate();
+    const startMonth = startDate.getMonth() + 1;
+    const startYear = startDate.getFullYear();
+
+    const endDay = endDate.getDate();
+    const endMonth = endDate.getMonth() + 1;
+    const endYear = endDate.getFullYear();
 
     const formSubmit = {
         "name": nameValue,
-        "startDate": startValue,
-        "endDate": endValue,
+        "startDate": {
+            "dateDay": startDay,
+            "dateMonth": startMonth,
+            "dateYear": startYear,
+        },
+        "endDate": {
+            "dateDay": endDay,
+            "dateMonth": endMonth,
+            "dateYear": endYear,
+        },
         "price": priceValue,
         "objective": objectiveValue,
         "pricePerDisplay": pricePerDisplay
     }
+
+    console.log(formSubmit);
 
     fetch("http://localhost:8080/api/campaign/create", {
         method: "POST",
