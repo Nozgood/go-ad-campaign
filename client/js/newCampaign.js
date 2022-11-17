@@ -17,8 +17,6 @@ const newCampaign = () => {
     const objectiveValue = parseInt(campaignObjective.value);
     const pricePerDisplay = priceValue / objectiveValue;
 
-    console.log(startDate, endDate);
-
     const startDay = startDate.getDate();
     const startMonth = startDate.getMonth() + 1;
     const startYear = startDate.getFullYear();

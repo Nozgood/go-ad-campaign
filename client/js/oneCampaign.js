@@ -16,9 +16,11 @@ const deleteButton = document.getElementById("deleteButton");
 fetch("http://localhost:8080/api/campaign/getByName/" + campaignUrlName)
     .then((res) => {return res.json()})
     .then((data) => {
+        const startDate = data.startDate.dateYear + "-" + data.startDate.dateMonth + "-" + data.startDate.dateDay;
+        const endDate = data.endDate.dateYear + "-" + data.endDate.dateMonth + "-" + data.endDate.dateDay;
         campaignName.setAttribute("value", data.name);
-        campaignStart.setAttribute("value", data.startDate);
-        campaignEnd.setAttribute("value", data.endDate);
+        campaignStart.setAttribute("value", startDate);
+        campaignEnd.setAttribute("value", endDate);
         campaignPrice.setAttribute("value", data.price);
         campaignObjective.setAttribute("value", data.objective);
         campaignPricePerDisplay.setAttribute("value", data.pricePerDisplay);
@@ -33,16 +35,32 @@ campaignObjective.addEventListener("change", () => {
 // function to request to update
 const updateCampaign = () => {
     const nameValue = campaignName.value;
-    const startValue = campaignStart.value;
-    const endValue = campaignEnd.value;
+    const startValue = new Date(campaignStart.value);
+    const endValue = new Date(campaignEnd.value);
     const priceValue = parseInt(campaignPrice.value);
     const objectiveValue = parseInt(campaignObjective.value);
     const pricePerDisplay = parseInt(campaignPricePerDisplay.value);
 
+    const startDay = startValue.getDate();
+    const startMonth = startValue.getMonth() + 1;
+    const startYear = startValue.getFullYear();
+
+    const endDay = endValue.getDate();
+    const endMonth = endValue.getMonth() + 1;
+    const endYear = endValue.getFullYear();
+
     const updatedInfos = {
         "name": nameValue,
-        "startDate": startValue,
-        "endDate": endValue,
+        "startDate": {
+            "dateDay": startDay,
+            "dateMonth": startMonth,
+            "dateYear": startYear,
+        },
+        "endDate": {
+            "dateDay": endDay,
+            "dateMonth": endMonth,
+            "dateYear": endYear,
+        },
         "price": priceValue,
         "objective": objectiveValue,
         "pricePerDisplay": pricePerDisplay
