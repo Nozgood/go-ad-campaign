@@ -85,17 +85,19 @@ searchBar.addEventListener("change", (e) => {
 })
 
 searchButton.addEventListener("click", () => {
+
+    const linksAlready = document.querySelectorAll("div#searchResults > a"); 
+    if (linksAlready.length > 0) {
+        linksAlready.forEach((link) => {
+            link.remove();
+        })
+    }
+
     allCampaignsName.filter((value) => {
         return (
             value.toLowerCase().includes(searchValue.toLowerCase())
         )
     }).map((value) => {
-        const linksAlready = document.querySelectorAll("div#searchResults > a");
-        if (linksAlready.length > 0) {
-            linksAlready.forEach((link) => {
-                link.remove();
-            })
-        }
             const searchLink = document.createElement("a");
             searchLink.setAttribute("href", "http://localhost:8080/" + value);
             searchLink.innerHTML = value;
