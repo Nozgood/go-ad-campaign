@@ -21,7 +21,7 @@ var (
 	ctx					context.Context
 	campaignCollection 	*mongo.Collection
 	mongoClient 		*mongo.Client
-	err 				error
+	err					error
 )
 
 func init() {

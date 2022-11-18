@@ -51,11 +51,8 @@ const newCampaign = () => {
         },
         body: JSON.stringify(formSubmit),
     })
-    .then((res) => {
-        return res.json();
-    })
-    .then((data) => {
-        console.log(data);
+    .then(() => {
+        window.location.href = "http://localhost:8080"
     })
 }
 
