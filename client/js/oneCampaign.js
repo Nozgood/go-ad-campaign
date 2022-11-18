@@ -73,12 +73,9 @@ const updateCampaign = () => {
         },
         body: JSON.stringify(updatedInfos)
     })
-        .then((res) => {
-            return res.json();
+        .then(() => {
+            window.location.href = "http://localhost:8080"
         })
-        .then((data) => {
-            console.log(data);
-        });
 }
 
 // update request send when click on submit button
@@ -92,11 +89,8 @@ const deleteCampaign = () => {
     fetch("http://localhost:8080/api/campaign/delete/" + campaignUrlName, {
         method: "DELETE"
     })
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            console.log(data);
+        .then(() => {
+            window.location.href = "http://localhost:8080";
         })
 }
 

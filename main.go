@@ -21,7 +21,7 @@ var (
 	ctx					context.Context
 	campaignCollection 	*mongo.Collection
 	mongoClient 		*mongo.Client
-	err 				error
+	err					error
 )
 
 func init() {
@@ -61,7 +61,7 @@ func init() {
 
 	server.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "okok",
+			"title": "Ad Campaign Management",
 		})
 	})
 	server.GET("/new", func(c *gin.Context) {
