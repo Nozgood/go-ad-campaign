@@ -42,8 +42,6 @@ const newCampaign = () => {
         "pricePerDisplay": pricePerDisplay
     }
 
-    console.log(formSubmit);
-
     fetch("http://localhost:8080/api/campaign/create", {
         method: "POST",
         headers: {
