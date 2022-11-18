@@ -10,15 +10,15 @@ import (
 )
 
 type CampaignServiceImpl struct {
-	campaignCollection *mongo.Collection
-	ctx context.Context
+	campaignCollection 	*mongo.Collection
+	ctx 				context.Context
 }
 
 //initialisation
 func NewCampaignService(campaignCollection *mongo.Collection, ctx context.Context) CampaignService {
 	return &CampaignServiceImpl {
 		campaignCollection: campaignCollection,
-		ctx: ctx, // using this context can be useful in production because you can set timeout for example
+		ctx: ctx,
 	}
 }
 

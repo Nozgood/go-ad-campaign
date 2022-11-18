@@ -11,7 +11,7 @@ const searchResults = document.getElementById("searchResults");
 const filterByDate = (allCampaignsDate) => {
     const dayDate = new Date();
     allCampaignsDate.forEach((campaignObject) => {
-        if (dayDate > campaignObject.end) {
+        if (dayDate > campaignObject.end || dayDate < campaignObject.start) {
             const campaignToRemove = document.getElementById(campaignObject.name);
             campaignToRemove.remove();
         }
@@ -46,6 +46,7 @@ fetch("http://localhost:8080/api/campaign/getAll")
                 campaignModify.innerHTML = "Afficher";
 
                 campaignDiv.appendChild(campaignName);
+                campaignDiv.appendChild(campaignStart);
                 campaignDiv.appendChild(campaignEnd);
                 campaignDiv.appendChild(campaignPrice);
                 campaignDiv.appendChild(campaignObjective);
