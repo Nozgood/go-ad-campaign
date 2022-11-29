@@ -18,11 +18,12 @@ const filterByDate = (allCampaignsDate) => {
     })
 }
 
-fetch("http://localhost:8080/api/campaign/getAll")
+fetch("http://localhost:8080/api/campaign")
         .then((res) => {
             return res.json()
         })
         .then((data) => {
+            console.log(data);
             allCampaigns = data;
             for (let i=0; i < allCampaigns.length; i++) {
                 let campaignDiv = document.createElement("div");
