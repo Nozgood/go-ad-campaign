@@ -13,7 +13,7 @@ const submit = document.getElementById("submit");
 const deleteButton = document.getElementById("deleteButton");
 
 
-fetch("http://localhost:8080/api/campaign/getByName/" + campaignUrlName)
+fetch("http://localhost:8080/api/campaign/" + campaignUrlName)
     .then((res) => {return res.json()})
     .then((data) => {
         const startDate = data.startDate.dateYear + "-" + data.startDate.dateMonth + "-" + data.startDate.dateDay;
@@ -66,7 +66,7 @@ const updateCampaign = () => {
         "pricePerDisplay": pricePerDisplay
     }
 
-    fetch("http://localhost:8080/api/campaign/update/" + campaignUrlName, {
+    fetch("http://localhost:8080/api/campaign/" + campaignUrlName, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -86,7 +86,7 @@ submit.addEventListener("click", (event) => {
 
 // function to delete the campaign 
 const deleteCampaign = () => {
-    fetch("http://localhost:8080/api/campaign/delete/" + campaignUrlName, {
+    fetch("http://localhost:8080/api/campaign/" + campaignUrlName, {
         method: "DELETE"
     })
         .then(() => {

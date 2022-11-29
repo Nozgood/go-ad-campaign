@@ -84,14 +84,12 @@ func (cc *CampaignController) DeleteCampaign(ctx *gin.Context)  {
 	ctx.JSON(http.StatusOK, gin.H{"message": "campaign deleted"}) // response
 } 
 
-// Display Index.html
-
 // Routing 
 func (cc *CampaignController) RegisterCampaignRoutes(rg *gin.RouterGroup) {
 	campaignRoute := rg.Group("/campaign")
-	campaignRoute.POST("/create", cc.CreateCampaign) // final route is http://localhost:PORT/campaign/create for example
-	campaignRoute.GET("/getAll", cc.GetAll)
-	campaignRoute.GET("/getByName/:name", cc.GetByName)
-	campaignRoute.PATCH("/update/:name", cc.UpdateCampaign)
-	campaignRoute.DELETE("/delete/:name", cc.DeleteCampaign)
+	campaignRoute.POST("/", cc.CreateCampaign) // final route is http://localhost:PORT/campaign/create for example
+	campaignRoute.GET("/", cc.GetAll)
+	campaignRoute.GET("/:name", cc.GetByName)
+	campaignRoute.PATCH("/:name", cc.UpdateCampaign)
+	campaignRoute.DELETE("/:name", cc.DeleteCampaign)
 }
